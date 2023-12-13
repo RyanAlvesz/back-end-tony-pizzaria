@@ -12,16 +12,15 @@ const funcoes = require('./model/funcoes.js')
 
 const app = express()
 
+app.use(cors({
+    origin: '*', // ou uma lista específica de origens permitidas
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+}));
 
-app.use((request, response, next) => {
-
-    response.header('Access-Control-Allow-Origin', '*')
-    response.header('Access-Control-Allow-Credentials', true)
-    response.header('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT')
-    response.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
-    next()
-
-})  
+app.use(bodyParser.json());
 
 
 // EndPoints: Listar o nome, id, email e senha de todos os usuários
