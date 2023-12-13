@@ -12,34 +12,22 @@ const funcoes = require('./model/funcoes.js')
 
 const app = express()
 
-const options = [
-    cors({
-      origin: '*',
-      methods: '*',
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true,
-    })
-];
-  
-app.use(options);
 
+app.use((request, response, next) => {
 
+    response.header('Access-Control-Allow-Origin', '*')
+    response.header('Access-Control-Allow-Credentials', true)
+    response.header('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT')
+    response.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
+    next()
 
-// app.use((request, response, next) => {
-
-//     response.header('Access-Control-Allow-Origin', '*')
-//     response.header('Access-Control-Allow-Credentials', true)
-//     response.header('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT')
-//     response.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
-//     next()
-
-// })  
+})  
 
 // EndPoints: Listar o nome, id, email e senha de todos os usuários
 app.get('/usuarios/', cors(), async (request, response, next) => {
-
-    response.json(funcoes.getListaUsuarios())
     response.status(200)
+    response.json(funcoes.getListaUsuarios())
+    
     
 })
 
