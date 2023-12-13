@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 
 // EndPoints: Listar o nome, id, email e senha de todos os usuários
-app.get('/usuarios/', cors(), async (request, response, next) => {
+app.get('/usuarios/', async (request, response, next) => {
     response.status(200)
     response.json(funcoes.getListaUsuarios())
     
