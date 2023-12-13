@@ -12,11 +12,6 @@ const funcoes = require('./model/funcoes.js')
 
 const app = express()
 
-
-app.use(cors());
-app.use(bodyParser.json());
-
-
 const options = [
     cors({
       origin: '*',
