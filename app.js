@@ -23,13 +23,24 @@ app.use((request, response, next) => {
 
 })  
 
-// EndPoints: Listar o nome, id, email e senha de todos os usuários
 app.get('/usuarios/', cors(), async (request, response, next) => {
-    response.status(200)
-    response.json(funcoes.getListaUsuarios())
+    try {
+        const listaUsuarios = funcoes.getListaUsuarios();
+        response.status(200).json(listaUsuarios);
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ erro: 'Erro ao processar a solicitação' });
+    }
+});
+
+
+// // EndPoints: Listar o nome, id, email e senha de todos os usuários
+// app.get('/usuarios/', cors(), async (request, response, next) => {
+//     response.status(200)
+//     response.json(funcoes.getListaUsuarios())
     
     
-})
+// })
 
 // EndPoints: Listar os dados de um usuário
 app.get('/usuario/:id', cors(), async (request, response, next) => {
